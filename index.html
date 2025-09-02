@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <title>Fairplay Hash Verifier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h1>Fairplay Hash Verifier</h1>
+            <p class="description">
+                This tool verifies that all column movements are predetermined as soon as the game begins,
+                ensuring fairness through hash validation.
+            </p>
+            
+            <div class="source-code">
+                <a href="https://github.com/fairplay-trade/fairplay-trade-provably-fair" target="_blank">
+                    Source Code
+                    <img src="assets/icons/link.svg" alt="External link" class="external-link-icon">
+                </a>
+                <span style="margin-left: 20px; color: #898B8A; font-size: 12px;">v4a0eeec</span>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <div class="input-group">
+                <div class="input-with-copy">
+                    <span class="input-label">Seed</span>
+                    <input type="text" id="seed" readonly>
+                    <button class="copy-btn" data-target="seed">
+                        <img src="assets/icons/copy.svg" alt="Copy" class="copy-icon">
+                    </button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <div class="input-with-copy">
+                    <span class="input-label">Hash</span>
+                    <input type="text" id="hash" readonly>
+                    <button class="copy-btn" data-target="hash">
+                        <img src="assets/icons/copy.svg" alt="Copy" class="copy-icon">
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="verification-status" id="verification-status">
+        </div>
+
+        <div class="table-container">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Your Trade</th>
+                        <th>Market Price (Chart Result)</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
