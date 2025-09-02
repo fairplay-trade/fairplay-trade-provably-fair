@@ -62,7 +62,6 @@ body {
 
 .header-container {
     width: 980.31px;
-    height: 134px;
     display: flex;
     flex-direction: column;
     gap: 20px;
