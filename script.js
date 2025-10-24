@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const stepParam = urlParams.get('st');
     const betsCsv = urlParams.get('bets');
     const bets64 = urlParams.get('bets64');
+    const gameType = urlParams.get('gameType') || 'dynamic';
 
     document.getElementById('seed').value = seed;
     document.getElementById('hash').value = providedHash;
@@ -29,9 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return 1;
     }
 
+    function getDeltaWeighted(seed, index) {
+        const hashSource = `${seed}-${index}`;
+        const hash = CryptoJS.SHA256(hashSource).toString();
+        const numericHash = parseInt(hash.slice(0, 8), 16);
+        const percentage = numericHash % 1000;
+
+        if (percentage < 25) return -1;
+        if (percentage < 975) return 0;
+        return 1;
+    }
+
     function reconstructPrices(seed, maxIndex, currentPrice, currentPriceIndex) {
         const deltas = new Array(maxIndex + 1).fill(0);
-        for (let i = 1; i <= maxIndex; i++) deltas[i] = getDelta(seed, i);
+        const deltaFunction = gameType === 'stable' ? getDeltaWeighted : getDelta;
+        for (let i = 1; i <= maxIndex; i++) deltas[i] = deltaFunction(seed, i);
         const prefix = new Array(maxIndex + 1).fill(0);
         for (let i = 1; i <= maxIndex; i++) prefix[i] = prefix[i - 1] + deltas[i];
         const usedStep = Number(stepParam) || PRICE_STEP;
