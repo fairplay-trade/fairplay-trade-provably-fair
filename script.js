@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             for (const price of trades) {
                 const button = document.createElement('button');
                 button.className = 'trade-button ' + (mpList.includes(price) ? 'win' : 'lose');
-                button.textContent = gameType === 'stable' ? (price / 10000).toFixed(4) : String(price);
+                button.textContent = gameType === 'stable' ? (price / 100000).toFixed(5) : String(price);
                 tradeOptions.appendChild(button);
             }
             tradeCell.appendChild(tradeOptions);
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (Number.isFinite(mp)) {
                     const btn = document.createElement('button');
                     btn.className = 'price-button';
-                    btn.textContent = gameType === 'stable' ? (mp / 10000).toFixed(4) : String(mp);
+                    btn.textContent = gameType === 'stable' ? (mp / 100000).toFixed(5) : String(mp);
                     priceResults.appendChild(btn);
                 }
             }
